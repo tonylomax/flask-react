@@ -12,23 +12,24 @@ app.config[
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
+
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     todo_text = db.Column(db.String(100), index=True)
-class blogs(db.Model):
-    id = db.Column(
-        db.Integer, primary_key=True
-    )  # primary key column, automatically generated IDs
-    author = db.Column(db.String(80), index=True, unique=True)  # book title
-    blogs = db.Column(db.String(80), index=True, unique=True)  # book title
+
+
+# class blogs(db.Model):
+#     id = db.Column(
+#         db.Integer, primary_key=True
+#     )  # primary key column, automatically generated IDs
+#     author = db.Column(db.String(80), index=True, unique=True)  # book title
+#     blogs = db.Column(db.String(80), index=True, unique=True)  # book title
 
 db.create_all()
 
+
 def __repr__(self):
     return "{} in: {},{}".format(self.author, self.content)
-
-
-# todos = ["learn flask", "doa  thing"]
 
 
 class ToDoForm(FlaskForm):
@@ -38,9 +39,11 @@ class ToDoForm(FlaskForm):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    myBlogs = blogs.query.all()
-    print("my blogs",  myBlogs)
+    # myBlogs = blogs.query.all()
+    # print("my blogs",  myBlogs)
     if "todo" in request.form:
-        todos.append(request.form["todo"])
-    return render_template("index.html", todos=todos, template_form=ToDoForm())
-    
+        db.session.add(Todo(todo_text=request.form["todo"]))
+        db.session.commit()
+    return render_template(
+        "index.html", todos=Todo.query.all(), template_form=ToDoForm()
+    )
