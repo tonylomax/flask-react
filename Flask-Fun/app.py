@@ -2,9 +2,11 @@ from flask import Flask, render_template, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from flask_sqlalchemy import SQLAlchemy
+from flask import send_from_directory
+import time
 
+app = Flask(__name__, static_folder="../react-flask-fun/build", static_url_path="/")
 
-app = Flask(__name__)
 app.config["SECRET_KEY"] = "secretkey"
 app.config[
     "SQLALCHEMY_DATABASE_URI"
@@ -37,13 +39,24 @@ class ToDoForm(FlaskForm):
     submit = SubmitField("Add todo")
 
 
+# @app.route("/", methods=["GET", "POST"])
+# def index():
+#     # myBlogs = blogs.query.all()
+#     # print("my blogs",  myBlogs)
+#     if "todo" in request.form:
+#         db.session.add(Todo(todo_text=request.form["todo"]))
+#         db.session.commit()
+#     return render_template(
+#         "index.html", todos=Todo.query.all(), template_form=ToDoForm()
+#     )
+
+
+@app.route("/api/time")
+def get_current_time():
+    return {"time": time.time()}
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
-    # myBlogs = blogs.query.all()
-    # print("my blogs",  myBlogs)
-    if "todo" in request.form:
-        db.session.add(Todo(todo_text=request.form["todo"]))
-        db.session.commit()
-    return render_template(
-        "index.html", todos=Todo.query.all(), template_form=ToDoForm()
-    )
+    print("HERE")
+    return app.send_static_file("index.html")
