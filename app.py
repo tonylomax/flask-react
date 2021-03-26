@@ -7,6 +7,7 @@ import time
 
 app = Flask(__name__, static_folder="/React/build", static_url_path="/")
 
+
 # app.config["SECRET_KEY"] = "secretkey"
 # app.config[
 #     "SQLALCHEMY_DATABASE_URI"
