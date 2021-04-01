@@ -11,7 +11,6 @@ certifi==2020.12.5
 cffi
 chardet
 click==7.1.2
-cloudinary==1.24.0
 conda==4.9.2
 conda-package-handling
 cryptography
