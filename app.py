@@ -56,12 +56,15 @@ app = Flask(
 #         "index.html", todos=Todo.query.all(), template_form=ToDoForm()
 #     )
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=False, port=os.environ.get("PORT", 80))
+
 
 @app.route("/api/time")
 def get_current_time():
     return {"time": time.time()}
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
     return app.send_static_file("index.html")
