@@ -6,9 +6,11 @@ from flask import Flask
 # from flask_sqlalchemy import SQLAlchemy
 # from flask import send_from_directory
 import time
+import os
 
-
-app = Flask(__name__, static_folder="./React/build", static_url_path="/")
+app = Flask(
+    __name__, static_folder=os.path.abspath("./React/build"), static_url_path="/"
+)
 
 
 # app.config["SECRET_KEY"] = "secretkey"
@@ -62,5 +64,4 @@ def get_current_time():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    print("HERE")
     return app.send_static_file("index.html")
