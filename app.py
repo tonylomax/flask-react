@@ -1,11 +1,14 @@
-from flask import Flask, render_template, request
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from flask import Flask
+
+# from flask_wtf import FlaskForm
+# from wtforms import StringField, SubmitField
+
 # from flask_sqlalchemy import SQLAlchemy
-from flask import send_from_directory
+# from flask import send_from_directory
 import time
 
-app = Flask(__name__, static_folder="/React/build", static_url_path="/")
+
+app = Flask(__name__, static_folder="./React/build", static_url_path="/")
 
 
 # app.config["SECRET_KEY"] = "secretkey"
