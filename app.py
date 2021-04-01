@@ -65,8 +65,3 @@ def get_current_time():
 @app.route("/", methods=["GET", "POST"])
 def index():
     return app.send_static_file("index.html")
-
-
-@app.errorhandler(404)
-def not_found(e):
-    return app.send_static_file("index.html")
