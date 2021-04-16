@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1> Hello world, the unix time is: </h1>
-        <p>The current time is {currentTime}.</p>
+        <p>{currentTime}.</p>
       </header>
     </div>
   );
